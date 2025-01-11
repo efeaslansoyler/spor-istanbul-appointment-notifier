@@ -4,7 +4,6 @@ from utils.check_avaible_session import check_avaible_session
 from pages.login_page import login
 from pages.session_page import session_page
 from config.settings import users
-import time
 
 def notify_users(user: dict, message: str):
     phone_number = user['phone_number']
@@ -24,12 +23,11 @@ def check_session_and_notify() -> None:
 
         message = check_avaible_session(driver)
 
-        if message:
-            notify_users(user,message)
+
+        notify_users(user,message)
         
         driver.quit()
 
 if __name__ == "__main__":
     check_session_and_notify()
-    time.sleep(3)
     print("done")

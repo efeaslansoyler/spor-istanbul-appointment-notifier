@@ -8,6 +8,7 @@ def check_avaible_session(driver) -> str:
         available_sessions = driver.find_elements(By.CLASS_NAME, "well")
         if not available_sessions:
             log_with_timestamp("No available sessions found")
+            return "Uygun seans bulunamadı"
         log_with_timestamp(f"Found {len(available_sessions)} available sessions")
         message = ""
         for session in available_sessions:
