@@ -4,7 +4,7 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import TimeoutException
 from utils.logger import log_with_timestamp
 
-def check_session_availability(driver) -> None:
+def session_page(driver) -> None:
     log_with_timestamp("navigating to session page")
     driver.get("https://online.spor.istanbul/uyespor")
 
