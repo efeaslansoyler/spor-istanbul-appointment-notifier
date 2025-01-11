@@ -2,7 +2,7 @@ from selenium.webdriver.common.by import By
 from utils.logger import log_with_timestamp
 from utils.js_text_extractor import extract_text_via_js
 
-def check_avaible_session(driver) -> None:
+def check_avaible_session(driver) -> str:
     log_with_timestamp("checking for available sessions")
     try:
         available_sessions = driver.find_elements(By.CLASS_NAME, "well")
@@ -15,5 +15,7 @@ def check_avaible_session(driver) -> None:
             session_quota = session.find_element(By.XPATH, ".//span[3]")
 
             log_with_timestamp(f"Session day: {extract_text_via_js(session_day)}, Session time: {extract_text_via_js(session_time)}, Session quota: {extract_text_via_js(session_quota)}")
+            message = f"Session day: {extract_text_via_js(session_day)}, Session time: {extract_text_via_js(session_time)}, Session quota: {extract_text_via_js(session_quota)}"
+            return message
     except Exception as e:
         log_with_timestamp(f"Error checking for available sessions: {str(e)}")
