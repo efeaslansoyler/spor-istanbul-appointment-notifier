@@ -9,13 +9,13 @@ def check_avaible_session(driver) -> str:
         if not available_sessions:
             log_with_timestamp("No available sessions found")
         log_with_timestamp(f"Found {len(available_sessions)} available sessions")
+        message = ""
         for session in available_sessions:
             session_day = session.find_element(By.XPATH, "./ancestor::div[contains(@class, 'panel')]/div[contains(@class, 'panel-heading')]/h3[contains(@class, 'panel-title')]")
             session_time = session.find_element(By.XPATH, ".//span[2]")
             session_quota = session.find_element(By.XPATH, ".//span[3]")
 
-            log_with_timestamp(f"Session day: {extract_text_via_js(session_day)}, Session time: {extract_text_via_js(session_time)}, Session quota: {extract_text_via_js(session_quota)}")
-            message = f"Session day: {extract_text_via_js(session_day)}, Session time: {extract_text_via_js(session_time)}, Session quota: {extract_text_via_js(session_quota)}"
-            return message
+            message += f"\n Seans günü: {extract_text_via_js(session_day)}, Seans Zamanı: {extract_text_via_js(session_time)}, Seans Kapasitesi: {extract_text_via_js(session_quota)}\n"
+        return message
     except Exception as e:
         log_with_timestamp(f"Error checking for available sessions: {str(e)}")

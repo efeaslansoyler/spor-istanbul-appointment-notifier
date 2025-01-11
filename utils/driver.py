@@ -12,7 +12,7 @@ def create_firefox_driver() -> webdriver.Firefox:
     try:
         log_with_timestamp("Creating Firefox driver")
         options = Options()
-        options.headless = True
+        options.add_argument("--headless")
         driver = webdriver.Firefox(options=options)
         log_with_timestamp("Firefox driver created successfully")
         return driver
