@@ -15,6 +15,10 @@
       "account_sid": "your_account_sid",
       "auth_token": "your_auth_token",
       "phone_number": "your_twilio_phone_number"
+    },
+    "settings": {
+      "MAX_RETRIES": 2,
+      "RETRY_DELAY": 30
     }
   }
   

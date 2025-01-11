@@ -8,6 +8,10 @@ with open(user_file_path, 'r') as f:
     data = json.load(f)
 
 users = data['users']
+
 TWILIO_ACCOUNT_SID = data['twilio']['account_sid']
 TWILIO_AUTH_TOKEN = data['twilio']['auth_token']
 TWILIO_PHONE_NUMBER = data['twilio']['phone_number']
+
+MAX_RETRIES = data['settings']['MAX_RETRIES']
+RETRY_DELAY = data['settings']['RETRY_DELAY']
