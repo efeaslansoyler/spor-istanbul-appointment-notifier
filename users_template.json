@@ -1,0 +1,20 @@
+{
+    "users": [
+      {
+        "username": "your_username_1",
+        "password": "your_password_1",
+        "phone_number": "+1234567890"
+      },
+      {
+        "username": "your_username_2",
+        "password": "your_password_2",
+        "phone_number": "+0987654321"
+      }
+    ],
+    "twilio": {
+      "account_sid": "your_account_sid",
+      "auth_token": "your_auth_token",
+      "phone_number": "your_twilio_phone_number"
+    }
+  }
+  
