@@ -10,6 +10,10 @@ from pages.login_page import login
 from pages.session_page import session_page
 
 def check_session_and_notify() -> None:
+    """
+    Checks session availability for each user and sends an SMS notification if available.
+    Retries the process if it fails, up to MAX_RETRIES times.
+    """
     for user in users:
         username = user['username']
         password = user['password']
@@ -24,14 +28,19 @@ def check_session_and_notify() -> None:
                 retry_count += 1
                 log_with_timestamp(f"User: {username} - Attempt {retry_count}/{MAX_RETRIES} to check session availability")
 
+                # Create a new Firefox driver instance
                 driver = create_firefox_driver()
 
+                # Log in to the website
                 login(driver, username, password)
 
+                # Navigate to the session page
                 session_page(driver)
                 
+                # Check for available sessions
                 message = check_available_session(driver)
 
+                # Send an SMS notification with the session details
                 send_sms(user_phone_number, message)
 
                 log_with_timestamp(f"Session check for {username} completed successfully")

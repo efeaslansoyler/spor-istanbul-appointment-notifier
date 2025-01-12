@@ -3,6 +3,15 @@ from utils.logger import log_with_timestamp
 from utils.js_text_extractor import extract_text_via_js
 
 def check_available_session(driver) -> str:
+    """
+    Checks for available sessions on the website and returns the session details.
+
+    Args:
+        driver: The WebDriver instance.
+
+    Returns:
+        str: A message containing the session details.
+    """
     log_with_timestamp("Checking for available sessions")
     try:
         available_sessions = driver.find_elements(By.CLASS_NAME, "well")

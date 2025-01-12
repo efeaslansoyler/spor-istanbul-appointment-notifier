@@ -5,6 +5,12 @@ from selenium.common.exceptions import TimeoutException
 from utils.logger import log_with_timestamp
 
 def session_page(driver) -> None:
+    """
+    Navigates to the session page and handles any pop-up modals.
+
+    Args:
+        driver: The WebDriver instance.
+    """
     log_with_timestamp("Navigating to session page")
     driver.get("https://online.spor.istanbul/uyespor")
 

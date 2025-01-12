@@ -2,6 +2,14 @@ from selenium.webdriver.common.by import By
 from utils.logger import log_with_timestamp
 
 def login(driver, username: str, password: str) -> None:
+    """
+    Logs in to the website using the provided username and password.
+
+    Args:
+        driver: The WebDriver instance.
+        username (str): The username for login.
+        password (str): The password for login.
+    """
     try:
         log_with_timestamp("Navigating to login page")
         driver.get("https://online.spor.istanbul/uyegiris")
