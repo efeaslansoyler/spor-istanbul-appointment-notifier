@@ -105,8 +105,3 @@ python main.py
 
 - Ensure the `geckodriver` is in your system's `PATH`.
 - Monitor logs for script output and errors.
-
-## License
-
-This project is licensed under the MIT License. See the LICENSE file for more information.
-
