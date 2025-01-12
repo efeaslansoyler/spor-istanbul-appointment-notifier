@@ -1,110 +1,110 @@
-# Spor Istanbul Appointment Notifier
+# Spor Istanbul Randevu Bildirici
 
-[![English](https://img.shields.io/badge/🇺🇸_English-blue)](README.md)
-[![Türkçe](https://img.shields.io/badge/🇹🇷_Türkçe-red)](README_TR.md)
+[![Türkçe](https://img.shields.io/badge/🇹🇷_Türkçe-red)](README.md)
+[![English](https://img.shields.io/badge/🇺🇸_English-blue)](README_EN.md)
 
-This project is a Python-based Selenium automation script designed to check session availability on Spor Istanbul's website and notify users via SMS when an available session is found. The script can run on various platforms including Linux, Windows, and macOS, and can be executed manually or scheduled to run automatically.
+Bu proje, Spor Istanbul'un web sitesindeki seans boşluklarını kontrol eden ve uygun bir seans bulunduğunda kullanıcıları SMS yoluyla bilgilendiren Python tabanlı bir Selenium otomasyon betiğidir. Betik, Linux, Windows ve macOS gibi çeşitli platformlarda çalışabilir ve manuel olarak veya otomatik olarak çalışacak şekilde planlanabilir.
 
-## Features
+## Özellikler
 
-- Automated login to Spor Istanbul website.
-- Dynamic session availability checking.
-- SMS notification for available sessions via Twilio.
-- Handles website bugs with retry mechanisms.
-- Supports multiple users.
+- Spor Istanbul web sitesine otomatik giriş.
+- Dinamik seans kontrolü.
+- Twilio üzerinden SMS bildirimi.
+- Web sitesi hatalarına karşı yeniden deneme mekanizmaları.
+- Birden fazla kullanıcıyı destekler.
 
-## Prerequisites
+## Ön Koşullar
 
-- Python 3.8 or higher
-- Firefox browser and Geckodriver
-- A Twilio account for SMS notifications
+- Python 3.8 veya üzeri
+- Firefox tarayıcı ve Geckodriver
+- SMS bildirimleri için bir Twilio hesabı
 
-## Installation
+## Kurulum
 
-1. Clone the repository:
+1. Depoyu klonlayın:
    ```bash
    git clone https://github.com/efeaslansoyler/spor-istanbul-appointment-notifier.git
    cd spor-istanbul-appointment-notifier
    ```
 
-2. Create a virtual environment:
+2. Sanal ortam oluşturun:
    ```bash
-   python3 -m venv venv  # For Windows use: python -m venv venv
-   source venv/bin/activate  # For Windows use: .\venv\Scripts\activate
+   python3 -m venv venv  # Windows için: python -m venv venv
+   source venv/bin/activate  # Windows için: .\venv\Scripts\activate
    ```
 
-3. Install dependencies:
+3. Gereksinimleri yükleyin:
    ```bash
    pip install -r requirements.txt
    ```
 
-4. Configure users:
+4. Kullanıcıları yapılandırın:
 
-   - Copy `users_template.json` to `users.json`.
-   - Edit `users.json` to add your username, password, and phone number for SMS notifications.
+   - `users_template.json` dosyasını `users.json` olarak kopyalayın.
+   - `users.json` dosyasını düzenleyerek kullanıcı adı, şifre ve SMS bildirimleri için telefon numaranızı ekleyin.
 
-## Example `users.json`
+## Örnek `users.json`
 
 ```json
 [
   {
-    "username": "your_username",
-    "password": "your_password",
-    "phone_number": "+1234567890"
+    "kullanici_adi": "kullanici_adiniz",
+    "sifre": "sifreniz",
+    "telefon_numarasi": "+901234567890"
   }
 ]
 ```
 
-**Important:** You must rename `users_template.json` to `users.json` and fill in the required information for the script to work.
+**Önemli:** Betiğin çalışması için `users_template.json` dosyasını `users.json` olarak yeniden adlandırmanız ve gerekli bilgileri doldurmanız gerekmektedir.
 
-## Running the Script
+## Betiği Çalıştırma
 
-### Manually
+### Manuel Olarak
 
-Activate your virtual environment and execute:
+Sanal ortamınızı etkinleştirin ve şu komutu çalıştırın:
 
 ```bash
 python main.py
 ```
 
-### Automatically
+### Otomatik Olarak
 
-#### On Linux (Cron Job)
+#### Linux'ta (Cron Job)
 
-1. Open the crontab editor:
+1. Crontab düzenleyicisini açın:
    ```bash
    crontab -e
    ```
 
-2. Add the following line to schedule the script every 12 hours:
+2. Betiği her 12 saatte bir çalıştırmak için aşağıdaki satırı ekleyin:
    ```bash
-   0 */12 * * * /path/to/venv/bin/python /path/to/your_project/main.py >> /path/to/your_project/logs/cron.log 2>&1
+   0 */12 * * * /venv/yolu/bin/python /projenizin/yolu/main.py >> /projenizin/yolu/logs/cron.log 2>&1
    ```
 
-3. Save and exit.
+3. Kaydedip çıkın.
 
-#### On Windows (Task Scheduler)
+#### Windows'ta (Görev Zamanlayıcı)
 
-1. Open Task Scheduler and create a new task.
-2. Set the action to run `python.exe` with arguments pointing to `main.py`.
-3. Schedule the task to run every 12 hours.
+1. Görev Zamanlayıcı'yı açın ve yeni bir görev oluşturun.
+2. Eylemi, `main.py` dosyasını işaret eden `python.exe` olarak ayarlayın.
+3. Görevi her 12 saatte bir çalışacak şekilde planlayın.
 
-#### On macOS (Launchd)
+#### macOS'ta (Launchd)
 
-1. Create a `.plist` file in `~/Library/LaunchAgents/`.
-2. Add scheduling instructions to execute the script every 12 hours.
-3. Load the plist file using:
+1. `~/Library/LaunchAgents/` dizininde bir `.plist` dosyası oluşturun.
+2. Betiği her 12 saatte bir çalıştıracak talimatları ekleyin.
+3. Plist dosyasını yüklemek için şu komutu kullanın:
    ```bash
-   launchctl load ~/Library/LaunchAgents/your_script.plist
+   launchctl load ~/Library/LaunchAgents/betik_adiniz.plist
    ```
 
-## Alternative Hosting Options
+## Alternatif Barındırma Seçenekleri
 
-- **Local Execution**: Run the script manually on your personal computer.
-- **Cloud Services**: Deploy to cloud platforms like AWS, Google Cloud, or Heroku.
-- **Raspberry Pi**: Set up the script on a Raspberry Pi for continuous local execution.
+- **Yerel Çalıştırma**: Betiği kişisel bilgisayarınızda manuel olarak çalıştırın.
+- **Bulut Hizmetleri**: AWS, Google Cloud veya Heroku gibi bulut platformlarına dağıtın.
+- **Raspberry Pi**: Betiği sürekli yerel çalıştırma için bir Raspberry Pi'ye kurun.
 
-## Notes
+## Notlar
 
-- Ensure the `geckodriver` is in your system's `PATH`.
-- Monitor logs for script output and errors.
+- `geckodriver`'ın sisteminizin `PATH`'inde olduğundan emin olun.
+- Betik çıktısı ve hataları için logları takip edin.
