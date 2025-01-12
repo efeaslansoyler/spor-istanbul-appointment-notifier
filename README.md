@@ -1,5 +1,8 @@
 # Spor Istanbul Appointment Notifier
 
+[![English](https://img.shields.io/badge/🇺🇸_English-blue)](README.md)
+[![Türkçe](https://img.shields.io/badge/🇹🇷_Türkçe-red)](README_TR.md)
+
 This project is a Python-based Selenium automation script designed to check session availability on Spor Istanbul's website and notify users via SMS when an available session is found. The script can run on various platforms including Linux, Windows, and macOS, and can be executed manually or scheduled to run automatically.
 
 ## Features
