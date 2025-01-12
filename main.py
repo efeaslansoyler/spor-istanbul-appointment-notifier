@@ -29,7 +29,7 @@ def check_session_and_notify() -> None:
                 login(driver, username, password)
 
                 session_page(driver)
-                message = check_available_session(driver)
+                
                 message = check_available_session(driver)
 
                 send_sms(user_phone_number, message)

@@ -1,7 +1,7 @@
 from selenium.webdriver.common.by import By
 from utils.logger import log_with_timestamp
 
-def login(driver, username, password) -> None:
+def login(driver, username: str, password: str) -> None:
     try:
         log_with_timestamp("Navigating to login page")
         driver.get("https://online.spor.istanbul/uyegiris")
