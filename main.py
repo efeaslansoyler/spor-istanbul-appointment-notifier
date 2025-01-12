@@ -1,11 +1,13 @@
-from utils.send_sms import send_sms
+import time
+
 from utils.driver import create_firefox_driver
-from utils.check_avaible_session import check_avaible_session
+from utils.logger import log_with_timestamp
+from utils.send_sms import send_sms
+from utils.check_available_session import check_available_session
+
+from config.settings import users, MAX_RETRIES, RETRY_DELAY
 from pages.login_page import login
 from pages.session_page import session_page
-from config.settings import users, MAX_RETRIES, RETRY_DELAY
-from utils.logger import log_with_timestamp
-import time
 
 def check_session_and_notify() -> None:
     for user in users:
@@ -15,6 +17,7 @@ def check_session_and_notify() -> None:
 
         retry_count = 0
         success = False
+        driver = None
 
         while retry_count < MAX_RETRIES and not success:
             try:
@@ -26,8 +29,8 @@ def check_session_and_notify() -> None:
                 login(driver, username, password)
 
                 session_page(driver)
-
-                message = check_avaible_session(driver)
+                message = check_available_session(driver)
+                message = check_available_session(driver)
 
                 send_sms(user_phone_number, message)
 
@@ -41,7 +44,8 @@ def check_session_and_notify() -> None:
                     time.sleep(RETRY_DELAY)
 
             finally:
-                driver.quit()
+                if driver:
+                    driver.quit()
 
 if __name__ == "__main__":
     check_session_and_notify()

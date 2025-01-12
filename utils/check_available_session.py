@@ -2,7 +2,7 @@ from selenium.webdriver.common.by import By
 from utils.logger import log_with_timestamp
 from utils.js_text_extractor import extract_text_via_js
 
-def check_avaible_session(driver) -> str:
+def check_available_session(driver) -> str:
     log_with_timestamp("checking for available sessions")
     try:
         available_sessions = driver.find_elements(By.CLASS_NAME, "well")
