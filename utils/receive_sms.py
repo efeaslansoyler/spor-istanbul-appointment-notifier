@@ -19,7 +19,7 @@ def sms_reply():
     latest_message = incoming_msg
 
     # Respond to the sender (optional)
-    #response = MessagingResponse()
+    response = MessagingResponse()
     #response.message("Thank you for your response!")
 
     return str(response)
