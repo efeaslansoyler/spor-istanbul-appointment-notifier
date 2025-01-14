@@ -14,6 +14,9 @@ TWILIO_ACCOUNT_SID = data['twilio']['account_sid']
 TWILIO_AUTH_TOKEN = data['twilio']['auth_token']
 TWILIO_PHONE_NUMBER = data['twilio']['phone_number']
 
+# OSR space api key
+OSR_SPACE_API_KEY = data['osr.space']['api_key']
+
 # Retry settings
 MAX_RETRIES = data['settings']['MAX_RETRIES']
 RETRY_DELAY = data['settings']['RETRY_DELAY']

@@ -6,6 +6,7 @@ from utils.logger import log_with_timestamp
 from utils.send_sms import send_sms
 from utils.check_available_session import check_available_session
 from utils.receive_sms import get_latest_message, start_flask_app
+from utils.make_appointment import make_appointment
 
 from config.settings import users, MAX_RETRIES, RETRY_DELAY
 from pages.login_page import login
@@ -56,6 +57,7 @@ def check_session_and_notify() -> None:
                     appointment_data = get_latest_message()
                     if appointment_data:
                         log_with_timestamp(f"User response received for user: {username} - {appointment_data}")
+                        make_appointment(driver, appointment_data)
                         break  # Exit the loop if a response is received
                     time.sleep(interval)  # Wait for the next check
                 else:
