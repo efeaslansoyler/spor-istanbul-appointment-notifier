@@ -1,5 +1,6 @@
 from flask import Flask, request
 from twilio.twiml.messaging_response import MessagingResponse
+import re
 
 app = Flask(__name__)
 
@@ -13,21 +14,27 @@ def sms_reply():
     incoming_msg = request.form.get('Body')
     from_number = request.form.get('From')
 
-    print(f"Received message from {from_number}: {incoming_msg}")
+    #print(f"Received message from {from_number}: {incoming_msg}")
 
     # Store the latest message
     latest_message = incoming_msg
 
-    # Respond to the sender (optional)
+    # Create a TwiML response to acknowledge receipt of the message
     response = MessagingResponse()
-    #response.message("Thank you for your response!")
 
     return str(response)
 
 def get_latest_message():
     """Return the latest received message."""
     global latest_message  # Declare that we're using the global variable
-    return latest_message
+    if latest_message is None:
+        return None
+    
+    numbers_only = re.sub(r"[^0-9]", "", latest_message)
+
+    
+    cleaned_message = ",".join(list(numbers_only))
+    return cleaned_message
 
 def start_flask_app():
     """Run the Flask app."""

@@ -45,15 +45,21 @@ def check_session_and_notify() -> None:
                 # Send an SMS notification with the session details
                 send_sms(user_phone_number, message)
 
-                #Wait for user response
+                # Wait for user response
                 log_with_timestamp(f"Waiting for user response for user: {username}")
-                time.sleep(60)
 
-                appointment_data = get_latest_message()
-                if appointment_data:
-                    log_with_timestamp(f"User response received for user: {username} - {appointment_data}")
+                timeout = 120  # Total wait time in seconds
+                interval = 5  # Check for new messages every 5 seconds
+                start_time = time.time()
+
+                while time.time() - start_time < timeout:
+                    appointment_data = get_latest_message()
+                    if appointment_data:
+                        log_with_timestamp(f"User response received for user: {username} - {appointment_data}")
+                        break  # Exit the loop if a response is received
+                    time.sleep(interval)  # Wait for the next check
                 else:
-                    log_with_timestamp(f"No response received for user: {username}")
+                    log_with_timestamp(f"No response received for user: {username} within {timeout} seconds")
 
                 log_with_timestamp(f"Session check for {username} completed successfully")
                 success = True

@@ -29,7 +29,7 @@ def check_available_session(driver) -> str:
 
             message += f"\n {[i]} - Seans günü: {extract_text_via_js(session_day)}, Seans Zamanı: {extract_text_via_js(session_time)}, Seans Kapasitesi: {extract_text_via_js(session_quota)}\n"
             i += 1
-        message += f"\n Randevu almak istiyorsanız lütfen istediğiniz seansın numarasını giriniz. Birden fazla seans almak için numaraları virgülle ayırabilirsiniz. Örnek: 1,2,3"
+        message += f"\n Lütfen istediğiniz seansın numarasını giriniz. Birden fazla seans almak için numaraları virgülle ayırabilirsiniz. Örnek: 1,2,3. Cevabınızı en geç 2 dakika içinde vermeniz gerekecektir."
         return message
     except Exception as e:
         log_with_timestamp(f"Error checking for available sessions: {str(e)}")
