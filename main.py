@@ -1,9 +1,11 @@
 import time
+import threading
 
 from utils.driver import create_firefox_driver
 from utils.logger import log_with_timestamp
 from utils.send_sms import send_sms
 from utils.check_available_session import check_available_session
+from utils.receive_sms import get_latest_message, start_flask_app
 
 from config.settings import users, MAX_RETRIES, RETRY_DELAY
 from pages.login_page import login
@@ -43,6 +45,16 @@ def check_session_and_notify() -> None:
                 # Send an SMS notification with the session details
                 send_sms(user_phone_number, message)
 
+                #Wait for user response
+                log_with_timestamp(f"Waiting for user response for user: {username}")
+                time.sleep(60)
+
+                appointment_data = get_latest_message()
+                if appointment_data:
+                    log_with_timestamp(f"User response received for user: {username} - {appointment_data}")
+                else:
+                    log_with_timestamp(f"No response received for user: {username}")
+
                 log_with_timestamp(f"Session check for {username} completed successfully")
                 success = True
             except Exception as e:
@@ -57,4 +69,7 @@ def check_session_and_notify() -> None:
                     driver.quit()
 
 if __name__ == "__main__":
+    flask_thread = threading.Thread(target=start_flask_app)
+    flask_thread.daemon = True
+    flask_thread.start()
     check_session_and_notify()
