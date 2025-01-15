@@ -14,6 +14,11 @@ TWILIO_ACCOUNT_SID = data['twilio']['account_sid']
 TWILIO_AUTH_TOKEN = data['twilio']['auth_token']
 TWILIO_PHONE_NUMBER = data['twilio']['phone_number']
 
+# Twilio test configurations
+TWILIO_TEST_ACCOUNT_SID = data['twilio']['test_account_sid']
+TWILIO_TEST_AUTH_TOKEN = data['twilio']['test_auth_token']
+TWILIO_TEST_PHONE_NUMBER = data['twilio']['test_phone_number']
+
 # OSR space api key
 OSR_SPACE_API_KEY = data['osr.space']['api_key']
 

@@ -44,7 +44,7 @@ def check_session_and_notify() -> None:
                 message = check_available_session(driver)
 
                 # Send an SMS notification with the session details
-                send_sms(user_phone_number, message)
+                send_sms(user_phone_number, message, test=True)
 
                 # Wait for user response
                 log_with_timestamp(f"Waiting for user response for user: {username}")

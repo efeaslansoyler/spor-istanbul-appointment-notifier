@@ -1,4 +1,6 @@
 from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 from utils.logger import log_with_timestamp
 from utils.js_text_extractor import extract_text_via_js
 
@@ -14,15 +16,18 @@ def check_available_session(driver) -> str:
     """
     log_with_timestamp("Checking for available sessions")
     try:
-        available_sessions = driver.find_elements(By.CLASS_NAME, "well")
+        available_sessions = WebDriverWait(driver, 10).until(EC.presence_of_all_elements_located((By.CLASS_NAME, "well")))
+        filtered_sessions = [
+            session for session in available_sessions if session.value_of_css_property("border-color") == "rgb(8, 245, 26)"
+        ]
         message = ""
         i = 1
-        if not available_sessions:
+        if not filtered_sessions:
             log_with_timestamp("No available sessions found")
             message += "Uygun seans bulunamadı"
             return message
-        log_with_timestamp(f"Found {len(available_sessions)} available sessions")
-        for session in available_sessions:
+        log_with_timestamp(f"Found {len(filtered_sessions)} available sessions")
+        for session in filtered_sessions:
             session_day = session.find_element(By.XPATH, "./ancestor::div[contains(@class, 'panel')]/div[contains(@class, 'panel-heading')]/h3[contains(@class, 'panel-title')]")
             session_time = session.find_element(By.XPATH, ".//span[2]")
             session_quota = session.find_element(By.XPATH, ".//span[3]")
