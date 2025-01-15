@@ -1,24 +1,25 @@
 {
-    "users": [
-      {
-        "username": "your_username_1",
-        "password": "your_password_1",
-        "phone_number": "+1234567890"
-      },
-      {
-        "username": "your_username_2",
-        "password": "your_password_2",
-        "phone_number": "+0987654321"
-      }
-    ],
-    "twilio": {
-      "account_sid": "your_account_sid",
-      "auth_token": "your_auth_token",
-      "phone_number": "your_twilio_phone_number"
-    },
-    "settings": {
-      "MAX_RETRIES": 2,
-      "RETRY_DELAY": 30
+  "users": [
+    {
+      "username": "your_username",
+      "password": "your_password",
+      "phone_number": "your_phone_number"
     }
+  ],
+  "twilio": {
+    "account_sid": "your_account_sid",
+    "auth_token": "your_auth_token",
+    "phone_number": "your_twilio_phone_number",
+    "test_account_sid": "your_test_account_sid",
+    "test_auth_token": "your_test_auth_token",
+    "test_phone_number": "your_test_twilio_phone_number"
+  },
+  "osr.space": {
+    "api_key": "your_osr_space_api_key",
+    "//": "'this is a comment !' no need osr.space api key right now because ibb spor removed captcha verification"
+  },
+  "settings": {
+    "MAX_RETRIES": "your_max_retries default is 2 dont forget to remove quotes",
+    "RETRY_DELAY": "your_retry_delay default is 10 dont forget to remove quotes"
   }
-  
+}
